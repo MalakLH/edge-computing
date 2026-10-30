@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f4f6fb;
+  color: #202536;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+main {
+  width: min(760px, 92%);
+  margin: 70px auto;
+  padding: 32px;
+  background: white;
+  border-radius: 16px;
+}
+
+.eyebrow {
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #5265d8;
+}
+
+h1 {
+  line-height: 1.2;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 24px;
+  border-radius: 12px;
+}
+
+.note {
+  margin-top: 24px;
+  color: #ffa2d5;
+  font-size: 14px;
+}
