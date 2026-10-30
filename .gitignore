@@ -3,3 +3,4 @@ terraform.tfstate
 keys/
 .venv
 __pycache__
+.terraform
