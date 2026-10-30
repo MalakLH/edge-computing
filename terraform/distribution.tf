@@ -1,9 +1,11 @@
+
 resource "aws_cloudfront_origin_access_control" "s3" {
   name                              = "edge-lab-s3"
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
   signing_protocol                  = "sigv4"
 }
+
 resource "aws_cloudfront_origin_access_control" "lambda" {
   name                              = "edge-lab-lambda"
   origin_access_control_origin_type = "lambda"
@@ -23,6 +25,7 @@ resource "aws_cloudfront_distribution" "cdn" {
     domain_name              = aws_s3_bucket.site.bucket_regional_domain_name
     origin_access_control_id = aws_cloudfront_origin_access_control.s3.id
   }
+
   origin {
     origin_id                = "lambda-img"
     domain_name              = replace(replace(aws_lambda_function_url.img.function_url, "https://", ""), "/", "")
@@ -49,6 +52,7 @@ resource "aws_cloudfront_distribution" "cdn" {
       function_arn = aws_cloudfront_function.site.arn
     }
   }
+
   ordered_cache_behavior { # no function: saves invocations
     path_pattern               = "/assets/*"
     target_origin_id           = "s3-site"
@@ -59,6 +63,7 @@ resource "aws_cloudfront_distribution" "cdn" {
     cache_policy_id            = data.aws_cloudfront_cache_policy.optimized.id
     response_headers_policy_id = aws_cloudfront_response_headers_policy.sec.id
   }
+
   ordered_cache_behavior {
     path_pattern               = "/img/*"
     target_origin_id           = "lambda-img"
@@ -72,6 +77,7 @@ resource "aws_cloudfront_distribution" "cdn" {
       function_arn = aws_cloudfront_function.img.arn
     }
   }
+
   ordered_cache_behavior {
     path_pattern               = "/img-raw/*"
     target_origin_id           = "lambda-img"
@@ -81,6 +87,7 @@ resource "aws_cloudfront_distribution" "cdn" {
     cache_policy_id            = aws_cloudfront_cache_policy.img_raw.id
     response_headers_policy_id = aws_cloudfront_response_headers_policy.sec.id
   }
+
   ordered_cache_behavior {
     path_pattern               = "/private/*"
     target_origin_id           = "s3-site"
@@ -98,9 +105,11 @@ resource "aws_cloudfront_distribution" "cdn" {
     response_page_path    = "/404.html"
     error_caching_min_ttl = 10
   }
+
   restrictions {
     geo_restriction { restriction_type = "none" }
   }
+
   viewer_certificate { cloudfront_default_certificate = true }
 }
 

@@ -38,8 +38,8 @@ resource "aws_lambda_function" "img" {
   role             = aws_iam_role.img.arn
   filename         = data.archive_file.img.output_path
   source_code_hash = data.archive_file.img.output_base64sha256
-  memory_size      = 512
-  timeout          = 10
+  memory_size      = var.lambda_memory_size
+  timeout          = var.lambda_timeout
   environment { variables = { BUCKET = aws_s3_bucket.originals.bucket } }
   depends_on = [aws_cloudwatch_log_group.img]
 }

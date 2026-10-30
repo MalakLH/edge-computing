@@ -1,3 +1,4 @@
+
 data "aws_cloudfront_cache_policy" "optimized" { name = "Managed-CachingOptimized" }
 
 resource "aws_cloudfront_origin_request_policy" "geo" {

@@ -24,13 +24,13 @@ resource "aws_s3_bucket_policy" "site" {
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
-      { Effect = "Allow", Principal = { Service = "cloudfront.amazonaws.com" }, Action = "s3:GetObject",
+      { Effect   = "Allow", Principal = { Service = "cloudfront.amazonaws.com" }, Action = "s3:GetObject",
         Resource = "${aws_s3_bucket.site.arn}/*",
-        Condition = { StringEquals = { "AWS:SourceArn" = aws_cloudfront_distribution.cdn.arn } } },
+      Condition = { StringEquals = { "AWS:SourceArn" = aws_cloudfront_distribution.cdn.arn } } },
       # ListBucket makes missing keys return 404 instead of 403
-      { Effect = "Allow", Principal = { Service = "cloudfront.amazonaws.com" }, Action = "s3:ListBucket",
+      { Effect   = "Allow", Principal = { Service = "cloudfront.amazonaws.com" }, Action = "s3:ListBucket",
         Resource = aws_s3_bucket.site.arn,
-        Condition = { StringEquals = { "AWS:SourceArn" = aws_cloudfront_distribution.cdn.arn } } }
+      Condition = { StringEquals = { "AWS:SourceArn" = aws_cloudfront_distribution.cdn.arn } } }
     ]
   })
 }
