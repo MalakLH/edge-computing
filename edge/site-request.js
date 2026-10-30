@@ -56,12 +56,13 @@ async function handler(event) {
     let bucket = req.cookies.ab && req.cookies.ab.value;
 
     if (bucket !== 'A' && bucket !== 'B') {
-        
+
         // get the percentage of b variant
         const pct = parseInt(await cfg('ab:b_percent', '50'), 10);
 
         // compares the pct variable to a random one to decide wether to use variant A or variant B
         bucket = Math.random() * 100 < pct ? 'B' : 'A';
+        
         return {
             statusCode: 302, statusDescription: 'Found',
             headers: { location: { value: '/' }, 'cache-control': { value: 'no-store' } },
