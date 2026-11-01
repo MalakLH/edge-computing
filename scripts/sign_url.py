@@ -1,15 +1,28 @@
 
+'''
+
+A signed URL is an ordinary URL with additional security parameters attached to it. 
+These parameters prove that the URL was signed using an authorized private key and specify when 
+the permission expires. If someone tries to access it without authorization, CloudFront should reject the request.
+
+'''
+
 import datetime
 import os
 import sys
 from pathlib import Path
 
+from dotenv import load_dotenv
 from botocore.signers import CloudFrontSigner
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import padding
 
 
 def main():
+
+    project_root = Path(__file__).resolve().parent.parent
+    load_dotenv(project_root / ".env")
+    
     if len(sys.argv) < 2:
         print(
             'Usage: python scripts/sign_url.py '
