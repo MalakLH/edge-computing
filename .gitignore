@@ -4,3 +4,4 @@ keys/
 .venv
 __pycache__
 .terraform
+img.zip

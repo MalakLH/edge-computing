@@ -1,7 +1,7 @@
 
 data "archive_file" "img" {
   type        = "zip"
-  source_dir  = "${path.module}/../build/image"
+  source_dir  = "${path.module}/../lambda/image"
   output_path = "${path.module}/img.zip"
 }
 
