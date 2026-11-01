@@ -117,7 +117,7 @@ def run(mode, asset_path=None):
                 url = make_url("/")
                 
             else:
-                url = make_url(asset_path)
+                url = make_url("/" + asset_path.lstrip("/\\"))
 
             # Use a fresh session for each A/B request so that
             # previous assignment cookies do not influence it.
@@ -142,6 +142,9 @@ def run(mode, asset_path=None):
                 f"Time: {result['elapsed_ms']:.1f} ms | "
                 f"Cache: {cache}"
             )
+
+            if result["error"]:
+                print(f"  ERROR: {result['error']}")
 
             if mode == "ab":
                 if result["location"]:
