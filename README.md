@@ -1,6 +1,6 @@
 # CloudFront Edge Computing & CDN Lab
 
-[![CI](https://github.com/<YOUR_GITHUB_USERNAME>/<YOUR_REPOSITORY>/actions/workflows/ci.yml/badge.svg)](https://github.com/<YOUR_GITHUB_USERNAME>/<YOUR_REPOSITORY>/actions/workflows/ci.yml)
+[![CI](https://github.com/MalakLH/edge-computing/actions/workflows/ci.yml/badge.svg)](https://github.com/MalakLH/edge-computing/actions/workflows/ci.yml)
 
 A hands-on AWS edge-computing project that combines **Amazon CloudFront, CloudFront Functions, CloudFront KeyValueStore (KVS), Amazon S3, AWS Lambda, and Terraform** to build a configurable CDN for static content, optimized images, and protected files.
 
