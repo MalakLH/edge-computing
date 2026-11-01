@@ -22,6 +22,18 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Prepare CloudFront public key
+        env:
+          CLOUDFRONT_PUBLIC_KEY: ${{ secrets.CLOUDFRONT_PUBLIC_KEY }}
+        run: |
+          if [ -z "$CLOUDFRONT_PUBLIC_KEY" ]; then
+            echo "Missing CLOUDFRONT_PUBLIC_KEY GitHub secret"
+            exit 1
+          fi
+
+          mkdir -p keys
+          printf '%s\n' "$CLOUDFRONT_PUBLIC_KEY" > keys/public_key.pem
+
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
         with:
